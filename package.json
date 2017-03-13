@@ -1,0 +1,22 @@
+{
+  "name": "promise-chain",
+  "version": "1.0.0",
+  "description": "A way to control the sequencing of a number tasks that use promises, but which depend upon the outcome of each other.",
+  "main": "promise-chain.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bassmanitram/promise-chain.git"
+  },
+  "author": "martin.j.bartlett@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bassmanitram/promise-chain/issues"
+  },
+  "homepage": "https://github.com/bassmanitram/promise-chain#readme"
+}
