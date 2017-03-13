@@ -1,6 +1,6 @@
 'use strict'
 
-function PromiseChain(promiseFactories) {
+function PromiseCChain(promiseFactories) {
 	this.steps = promiseFactories.map(
 		function(step) {
 			if (typeof step === 'string')
@@ -13,20 +13,20 @@ function PromiseChain(promiseFactories) {
 	);
 }
 
-PromiseChain.factory = function (factories) {
+PromiseCChain.factory = function (factories) {
 
-	const pc = new PromiseChain(factories);
+	const pc = new PromiseCChain(factories);
 
 	return function(context) {
 		if (!context) {
 			context = {};
 		}
-		return pc.steps.reduce(function(promiseChain, step) {
-			return promiseChain.then(function(data) {
+		return pc.steps.reduce(function(promiseCChain, step) {
+			return promiseCChain.then(function(data) {
 				return step(context);
 			});
 		}, Promise.resolve());
 	}
 }
 
-module.exports = PromiseChain;
+module.exports = PromiseCChain;

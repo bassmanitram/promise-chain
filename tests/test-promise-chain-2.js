@@ -1,4 +1,4 @@
-const PromiseChain = require('../promise-chain.js')
+const PromiseCChain = require('../index.js')
 
 /*
  * A function that returns a task-runner function (a function that accepts a context returns a Promise)
@@ -30,7 +30,7 @@ const tasks = [
 /*
  * Runt them as a chain
  */
-PromiseChain.factory(tasks)({context: "this is the initial context"}).then(
+PromiseCChain.factory(tasks)({context: "this is the initial context"}).then(
     function() {console.log('DONE');}
 ).catch(function (err) {
     console.log('UHOH', err, err.stack);

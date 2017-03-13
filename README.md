@@ -1,7 +1,8 @@
-# promise-chain
+# promise-command-chain
 A way to control the sequencing of a number tasks that use promises, but which depend upon the outcome of each other.
 
-This is partially inspired by the Commons-Chain modeule for Java, though it is less functional at the moment.
+This is partially inspired by the Commons-Chain implementation of the Chain Of Command pattern for Java, 
+though it is less functional at the moment.
 
 The idea is that you have a number of tasks that, typically, use promises. However these tasks 
 
@@ -19,7 +20,7 @@ None.
 
 ## Installation
 ```bash
-npm install promise chain
+npm install promise-command-chain
 ```
 
 ## Usage
@@ -40,19 +41,19 @@ npm install promise chain
    each task.
 
 2. Add these functions an array.
-3. Call `PromiseChain.factory(your-array)`, which *itself* returns a function that takes a context object and returns a promise ... i.e. 
-it is a bona fide `task` that itself can be included in an array of tasks to another invocation of `PromiseChain.factory()`
+3. Call `PromiseCChain.factory(your-array)`, which *itself* returns a function that takes a context object and returns a promise ... i.e. 
+it is a bona fide `task` that itself can be included in an array of tasks to another invocation of `PromiseCChain.factory()`
 4. Invoke that function with your initialized context object, call the "then" and "catch" function on the returned promise.
 
 Another facile example using timeouts that are run in series:
 
 ```javascript
-const PromiseChain = require('promise-chain')
+const PromiseCChain = require('promise-command-chain')
 
 /*
  * A function that returns a task-runner function (a function that accepts a context returns a Promise)
  */
-const gereate_timeout_task = function(time) {
+const create_timeout_task = function(time) {
         console.log(`Creating task for timeout for ${time}`);
         return function(context) {
             console.log(`Running task for timeout for ${time}`);
@@ -70,16 +71,16 @@ const gereate_timeout_task = function(time) {
  * Generate task functions that wait for 1, 2, 3, and 4 seconds
  */
 const tasks = [
-	gereate_timeout_task(1000),
-	gereate_timeout_task(2000),
-	gereate_timeout_task(3000),
-	gereate_timeout_task(4000)
+	create_timeout_task(1000),
+	create_timeout_task(2000),
+	create_timeout_task(3000),
+	create_timeout_task(4000)
 ];
 
 /*
  * Run them as a chain
  */
-PromiseChain.factory(tasks)({context: "this is the initial context"}).then(
+PromiseCChain.factory(tasks)({context: "this is the initial context"}).then(
     function() {console.log('DONE');}
 ).catch(function (err) {
     console.log('UHOH', err, err.stack);

@@ -1,4 +1,4 @@
-const PromiseChain = require('../promise-chain.js')
+const PromiseCChain = require('../index.js')
 
 
 const pt = function(time) {
@@ -30,11 +30,11 @@ const factories2 = [
 ];
 
 const topfactories = [
-	PromiseChain.factory(factories1),
-	PromiseChain.factory(factories2),
+	PromiseCChain.factory(factories1),
+	PromiseCChain.factory(factories2),
 ]
 
-const pc = PromiseChain.factory(topfactories);
+const pc = PromiseCChain.factory(topfactories);
 
 pc({}).then(
 	function() {
