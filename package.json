@@ -1,6 +1,6 @@
 {
   "name": "promise-command-chain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A way to control the sequencing of a number tasks that use promises, but which depend upon the outcome of each other.",
   "main": "index.js",
   "directories": {
