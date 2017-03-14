@@ -17,13 +17,15 @@ PromiseCChain.factory = function (factories) {
 
 	const pc = new PromiseCChain(factories);
 
-	return function(context) {
+	return function(context, data1) {
 		if (!context) {
 			context = {};
 		}
 		return pc.steps.reduce(function(promiseCChain, step) {
 			return promiseCChain.then(function(data) {
-				return step(context);
+				if (data === true)
+					return Promise.resolve(data);
+				return step(context, data);
 			});
 		}, Promise.resolve());
 	}

@@ -3,18 +3,23 @@ const PromiseCChain = require('../index.js')
 /*
  * A function that returns a task-runner function (a function that accepts a context returns a Promise)
  */
-const gereate_timeout_task = function(time) {
+const gereate_timeout_task = function(time, terminate) {
         console.log(`Creating task for timeout for ${time}`);
         return function(context) {
             console.log(`Running task for timeout for ${time}`);
             return new Promise(function (resolve, reject) {
-                console.log(`Setting timeout for ${time}`);
-                setTimeout(function () {
-                        console.log(`Timeout for ${time} expired`);
-				                resolve(context);
+				console.log(`Setting timeout for ${time}`);
+	            setTimeout(function () {
+                    console.log(`Timeout for ${time} expired`);
+                    if (terminate) {
+                        console.log(`terminating the chain`);
+                        resolve(true)
+                    } else {
+                        resolve(context);
+                    }
                 }, time);
-            });
-        }
+			});
+		}
     };
 
 /*
@@ -23,7 +28,7 @@ const gereate_timeout_task = function(time) {
 const tasks = [
 	gereate_timeout_task(1000),
 	gereate_timeout_task(2000),
-	gereate_timeout_task(3000),
+	gereate_timeout_task(3000, true),
 	gereate_timeout_task(4000)
 ];
 
